@@ -1,6 +1,5 @@
 package com.config;
 
-import io.swagger.models.Contact;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
-public class swagger2 {
+public class Swagger2 {
 
     @Bean
     public Docket createRestApi() {
@@ -43,7 +42,6 @@ public class swagger2 {
         return new ApiInfoBuilder()
                 .title("社区管理系统")
                 .description("社区管理系统后台api接口文档")
-               // .contact(new contact"WitchSeele")
                 .version("1.0")
                 .build();
     }
