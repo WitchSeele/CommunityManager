@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface PayStatusDao {
-    @Insert({"INSERT INTO payStatus(residentId,residentName,lastWater,thisWater,lastEle,thisEle,lastGas,thisGas,net,parking,property,tollTime,tollMan,payMethod) " +
-            "VALUES(#{residentId},#{residentName},#{lastWater},#{thisWater},#{lastEle},#{thisEle},#{lastGas},#{thisGas},#{net},#{parking},#{property},#{tollTime},#{tollMan},#{payMethod})"})
+    @Insert({"INSERT INTO pay_status(residentId,residentName,lastWater,thisWater,lastEle,thisEle,lastGas,thisGas,net,parking,property,amount,tollTime,tollMan,payMethod,payStatus) " +
+            "VALUES(#{residentId},#{residentName},#{lastWater},#{thisWater},#{lastEle},#{thisEle},#{lastGas},#{thisGas},#{net},#{parking},#{property},#{amount},#{tollTime},#{tollMan},#{payMethod},#{payStatus})"})
 
     int createPayStatus(PayStatusEntity payStatusEntity);
 

@@ -9,8 +9,6 @@ import com.utils.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 //extends SnowflakerServiceHelper
 @Service
 public class PayStatusServiceImpl  implements PayStatusService {
@@ -21,10 +19,30 @@ public class PayStatusServiceImpl  implements PayStatusService {
     @Transactional
     public void createPayStatus(PayStatusEntityCreateVM createVM){
         Asserts.validate(createVM, "PayStatusEntityCreateVM");
-        Date now = new Date();
 
         PayStatusEntity payStatusEntity = EntityUtils.vm2Entity(createVM, PayStatusEntity.class);
 
         payStatusEntity.setResidentId(createVM.getResidentId());
+        payStatusEntity.setResidentName(createVM.getResidentName());
+        payStatusEntity.setLastWater(createVM.getLastWater());
+        payStatusEntity.setThisWater(createVM.getThisWater());
+        payStatusEntity.setLastEle(createVM.getLastEle());
+        payStatusEntity.setThisEle(createVM.getThisEle());
+        payStatusEntity.setLastGas(createVM.getLastGas());
+        payStatusEntity.setThisGas(createVM.getThisGas());
+        payStatusEntity.setNet(createVM.getNet());
+        payStatusEntity.setParking(createVM.getParking());
+        payStatusEntity.setProperty(createVM.getProperty());
+        int amount;
+        amount=createVM.getThisWater()- createVM.getLastWater()+
+                createVM.getThisEle()- createVM.getLastEle()+
+                createVM.getThisGas()-createVM.getLastGas()+
+                createVM.getNet()+createVM.getParking()+createVM.getProperty();
+        payStatusEntity.setAmount(amount);
+        payStatusEntity.setTollTime(createVM.getTollTime());
+        payStatusEntity.setTollMan(createVM.getTollMan());
+        payStatusEntity.setPayMethod(createVM.getPayMethod());
+        payStatusEntity.setPayStatus(createVM.getPayStatus());
+        payStatusDao.createPayStatus(payStatusEntity);
     }
 }

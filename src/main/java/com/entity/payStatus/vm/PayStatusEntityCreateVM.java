@@ -1,12 +1,17 @@
 package com.entity.payStatus.vm;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class PayStatusEntityCreateVM {
-    @ApiModelProperty("住户id")
+    @NotNull
+    @ApiModelProperty("住户id(notNull)")
     int residentId;
-    @ApiModelProperty("住户名字")
+    @NotNull
+    @ApiModelProperty("住户名字(notNull)")
     String residentName;
     @ApiModelProperty("上次水费基度")
     int lastWater;
@@ -26,12 +31,16 @@ public class PayStatusEntityCreateVM {
     int parking;
     @ApiModelProperty("物业费")
     int property;
-    @ApiModelProperty("收费时间")
+    //@ApiModelProperty("收费时间")
+    @ApiModelProperty("收费时间(eg.2020-02-05)")
+    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE)
     Date tollTime;
     @ApiModelProperty("收费人")
     String tollMan;
     @ApiModelProperty("支付方式")
     String payMethod;
+    @ApiModelProperty("支付状态(0未支付，1已支付)")
+    String payStatus;
 
     public int getResidentId() {
         return residentId;
@@ -143,5 +152,13 @@ public class PayStatusEntityCreateVM {
 
     public void setPayMethod(String payMethod) {
         this.payMethod = payMethod;
+    }
+
+    public String getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(String payStatus) {
+        this.payStatus = payStatus;
     }
 }

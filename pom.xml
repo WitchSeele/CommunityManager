@@ -197,7 +197,7 @@
                     <overwrite>true</overwrite>
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                 </configuration>
-                <!-- 数据库连接选择8.0以上的，因为用的mysql8.0-->
+                    <!-- 数据库连接选择8.0以上的，因为用的mysql8.0-->
 
             </plugin>
         </plugins>

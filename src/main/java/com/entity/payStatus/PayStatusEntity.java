@@ -1,6 +1,8 @@
 package com.entity.payStatus;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,12 +31,15 @@ public class PayStatusEntity implements Serializable{
     int property;
     @ApiModelProperty("总费用")
     int amount;
-    @ApiModelProperty("收费时间")
+    @ApiModelProperty(value = "收费时间", example = "2020-02-05 13:30:41")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
     Date tollTime;
     @ApiModelProperty("收费人")
     String tollMan;
     @ApiModelProperty("支付方式")
     String payMethod;
+    @ApiModelProperty("支付状态(0未支付，1已支付)")
+    String payStatus;
 
     public int getResidentId() {
         return residentId;
@@ -156,4 +161,11 @@ public class PayStatusEntity implements Serializable{
         this.payMethod = payMethod;
     }
 
+    public String getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(String payStatus) {
+        this.payStatus = payStatus;
+    }
 }

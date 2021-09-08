@@ -1,13 +1,51 @@
 
-spring:
-  datasource:
-    name: communitymanager  #数据库名
-    url: jdbc:mysql://192.168.40.98:3306/communitymanager #url
-    username: root  #用户名
-    password: 123456  #密码
-    driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动
+  spring:
+    application:
+      name: communitymanager
+    datasource:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.40.98:3306/communitymanager?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+      username: root
+      password: 123456
+      dbcp2:
+        test-while-idle: true
+        validation-query: SELECT 1
+        time-between-eviction-runs-millis: 3600000
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+        initial-size: 5
+        min-idle: 5
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        filters: stat,wall
+        connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+        filter:
+          stat:
+            merge-sql: true
+            slow-sql-millis: 5000
+        web-stat-filter:
+          enabled: true
+          url-pattern: /*
+          exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
 
+      #系统时间格式
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+      #上传文件大小配置
 
-mybatis:
-  mapper-locations: classpath:mapper/*.xml  #配置映射文件
-  type-aliases-package: com.example.test.bean #配置实体类
+  mybatis:
+    mapper-locations: classpath*:mapper/**/*Mapper.xml
+    configuration:
+      map-underscore-to-camel-case: true
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  pagehelper:
+    helper-dialect: mysql
