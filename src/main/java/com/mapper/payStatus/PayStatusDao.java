@@ -2,57 +2,37 @@ package com.mapper.payStatus;
 
 
 import com.entity.payStatus.PayStatusEntity;
+import com.entity.payStatus.vm.PayStatusEntitySearchVM;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 
 @Mapper
 public interface PayStatusDao {
-    @Insert({"INSERT INTO pay_status(residentId,residentName,lastWater,thisWater,lastEle,thisEle,lastGas,thisGas,net,parking,property,amount,tollTime,tollMan,payMethod,payStatus) " +
-            "VALUES(#{residentId},#{residentName},#{lastWater},#{thisWater},#{lastEle},#{thisEle},#{lastGas},#{thisGas},#{net},#{parking},#{property},#{amount},#{tollTime},#{tollMan},#{payMethod},#{payStatus})"})
+    @Insert({"INSERT INTO pay_status(residentId,residentName,lastWater,thisWater,water,lastEle,thisEle,ele" +
+            ",lastGas,thisGas,gas,net,parking,property,amount,tollTime,tollMan,payMethod,payStatus) " +
+            "VALUES(#{residentId},#{residentName},#{lastWater},#{thisWater},#{water},#{lastEle},#{thisEle},#{ele}" +
+            ",#{lastGas},#{thisGas},#{gas},#{net},#{parking},#{property},#{amount},#{tollTime},#{tollMan},#{payMethod},#{payStatus})"})
 
     int createPayStatus(PayStatusEntity payStatusEntity);
 
-//    @Select({"select id from department where department_name=#{departmentName} "})
-//    String getDepartmentIdByName(String departmentName);
-//
-//    @SelectProvider(type = DepartmentProvider.class, method = "SelectDepartment")
-//    /**
-//     *@Description:动态可多条件查找department表，并返回所有相关行数据
-//     *@Parameter:[params]
-//     *@Return:java.util.LinkedList<com.chiy.supervisionsystem.entity.department.DepartmentEntity>
-//     *@Author:NullUserException
-//     *@Date:2021/1/7
-//     *@Time:17:54
-//     **/
-//    List<DepartmentEntity> getDepartments(DepartmentEntitySearchVM searchVM);
-//
-//    @UpdateProvider(type = DepartmentProvider.class, method = "UpdateDepartment")
-//    /**
-//     *@Description:动态更改department信息
-//     *@Parameter:[departmentEntity]
-//     *@Return:java.lang.Integer
-//     *@Author:NullUserException
-//     *@Date:2021/1/6DepartmentDao
-//     *@Time:16:12
-//     **/
-//    Integer updateDepartment(DepartmentEntity departmentEntity);
-//
-//    @Delete({"update  department set state = if(state=1,2, 1) WHERE id=#{id}"})
-//    /**
-//     *@Description:通过ID删除部门信息
-//     *@Parameter:[id]
-//     *@Return:java.lang.Integer
-//     *@Date:2021/1/11
-//     **/
-//    Integer deleteByDepartmentId(@Param("id") String id);
-//
-//
-//    @Select({"SELECT * FROM department WHERE id=#{id}"})
-//    /**
-//     *@Description:根据部门ID查找部门详情，单位信息模块内部调用
-//     *@Parameter:[id]
-//     *@Return:com.chiy.supervisionsystem.entity.department.DepartmentEntity
-//     *@Date:2021/1/11
-//     **/
-//    DepartmentEntity getDepartmentByID(String id);
+    @Delete({"DELETE FROM pay_status WHERE payStatusId=#{payStatusId,jdbcType=INTEGER}"})
+
+    Integer deleteByPayStatusId(@Param("payStatusId") int payStatusId);
+
+    @Update({"UPDATE pay_status SET lastWater=#{lastWater},thisWater=#{thisWater},water=#{water},lastEle=#{lastEle}" +
+            ",thisEle=#{thisEle},ele=#{ele},lastGas=#{lastGas},thisGas=#{thisGas},gas=#{gas}" +
+            ",net=#{net},parking=#{parking},property=#{property},amount=#{amount},tollTime=#{tollTime}" +
+            ",tollMan=#{tollMan},payMethod=#{payMethod},payStatus=#{payStatus} WHERE payStatusId=#{payStatusId}"})
+
+    Integer updatePayStatus(PayStatusEntity payStatusEntity);
+
+    @Select({"SELECT * FROM pay_status WHERE payStatusId=#{payStatusId}"})
+
+    PayStatusEntity getPayStatusByID(int payStatusId);
+
+    @Select({"SELECT * FROM pay_status WHERE  residentId=#{residentId}"})
+    List<PayStatusEntity> selectAllByResidentId(PayStatusEntitySearchVM payStatusEntitySearchVM);
+
 }

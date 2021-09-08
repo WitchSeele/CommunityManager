@@ -1,16 +1,18 @@
 package com.controller;
 
 import com.common.ApiResult;
+import com.entity.payStatus.PayStatusEntity;
 import com.entity.payStatus.vm.PayStatusEntityCreateVM;
+import com.entity.payStatus.vm.PayStatusEntitySearchVM;
+import com.entity.payStatus.vm.PayStatusEntityUpdateVM;
+import com.github.pagehelper.PageInfo;
 import com.service.PayStatusService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = "缴费状态管理")
@@ -28,27 +30,36 @@ public class PayStatusController {
         return result;
     }
 
-//    @GetMapping("/departmentList")
-//    @ApiOperation("根据条件获取部门信息")
-//    @RequiresPermissions(value = {"department_departmentList", "administrator"}, logical = Logical.OR)
-//    public ApiResult<PageInfo<DepartmentEntityListVM>> departmentList(DepartmentEntitySearchVM searchVM) throws Exception {
-//        return ApiResult.SUCCESS(departmentService.departmentList(searchVM));
-//    }
-//
-//
-//    @DeleteMapping("/deleteDepartment")
-//    @ApiOperation("禁用/启用部门信息")
-//    @RequiresPermissions(value = {"department_deleteDepartment", "administrator"}, logical = Logical.OR)
-//    public ApiResult deleteByDepartmentId(String departmentIds) {
-//        departmentService.deleteByDepartmentId(departmentIds);
-//        return ApiResult.SUCCESS();
-//    }
-//
-//    @PutMapping("/saveDepartment")
-//    @ApiOperation("修改部门信息")
-//    @RequiresPermissions(value = {"department_updateDepartment", "administrator"}, logical = Logical.OR)
-//    public ApiResult updateDepartment(DepartmentEntityUpdateVM updateVM) {
-//        departmentService.updateDepartment(updateVM);
-//        return ApiResult.SUCCESS();
-//    }
+    @DeleteMapping("/deletePayStatus")
+    @ApiOperation("删除缴费状态信息")
+    @RequiresPermissions(value = {"payStatus_deletePayStatus", "administrator"}, logical = Logical.OR)
+    public ApiResult deleteByPayStatusId(int payStatusId) {
+        try {
+            if(payStatusService.deleteByPayStatusId(payStatusId)<=0)
+                return ApiResult.FAILURE("参数错误,删除失败");
+        }catch (Exception e) {
+            return ApiResult.FAILURE(e.getMessage());
+        }
+        return ApiResult.SUCCESS();
+    }
+
+    @PutMapping("/updatePayStatus")
+    @ApiOperation("修改缴费状态信息")
+    @RequiresPermissions(value = {"payStatus_updatePayStatus", "administrator"}, logical = Logical.OR)
+    public ApiResult updatePayStatus(PayStatusEntityUpdateVM updateVM) {
+        try {
+            if(payStatusService.updatePayStatus(updateVM)<=0)
+                return ApiResult.FAILURE("参数错误,修改失败");
+        }catch (Exception e) {
+            return ApiResult.FAILURE(e.getMessage());
+        }
+        return ApiResult.SUCCESS();
+    }
+
+    @GetMapping("/getPayStatusList")
+    @ApiOperation("根据住户id获取缴费信息")
+    @RequiresPermissions(value = {"payStatus_getPayStatusList", "administrator"}, logical = Logical.OR)
+    public ApiResult<PageInfo<PayStatusEntity>> selectAllByResidentId(PayStatusEntitySearchVM payStatusEntitySearchVM) throws Exception {
+        return ApiResult.SUCCESS(payStatusService.selectAllByResidentId(payStatusEntitySearchVM));
+    }
 }

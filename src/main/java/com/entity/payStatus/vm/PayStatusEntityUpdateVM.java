@@ -1,44 +1,33 @@
-package com.entity.payStatus;
+package com.entity.payStatus.vm;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class PayStatusEntity implements Serializable{
-    @ApiModelProperty("缴费信息id")
+public class PayStatusEntityUpdateVM {
+    @NotNull
+    @ApiModelProperty("缴费信息id(notNull)")
     int payStatusId;
-    @ApiModelProperty("住户id")
-    int residentId;
-    @ApiModelProperty("住户名字")
-    String residentName;
     @ApiModelProperty("上次水费基度")
     int lastWater;
     @ApiModelProperty("本次水费基度")
     int thisWater;
-    @ApiModelProperty("水费")
-    int water;
     @ApiModelProperty("上次电费基度")
     int lastEle;
     @ApiModelProperty("本次电费基度")
     int thisEle;
-    @ApiModelProperty("电费")
-    int ele;
     @ApiModelProperty("上次气费基度")
     int lastGas;
     @ApiModelProperty("本次气费基度")
     int thisGas;
-    @ApiModelProperty("气费")
-    int gas;
     @ApiModelProperty("光纤费")
     int net;
     @ApiModelProperty("停车费")
     int parking;
     @ApiModelProperty("物业费")
     int property;
-    @ApiModelProperty("总费用")
-    int amount;
     @ApiModelProperty("收费时间(eg.2020-02-05)")
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE)
     Date tollTime;
@@ -55,22 +44,6 @@ public class PayStatusEntity implements Serializable{
 
     public void setPayStatusId(int payStatusId) {
         this.payStatusId = payStatusId;
-    }
-
-    public int getResidentId() {
-        return residentId;
-    }
-
-    public void setResidentId(int residentId) {
-        this.residentId = residentId;
-    }
-
-    public String getResidentName() {
-        return residentName;
-    }
-
-    public void setResidentName(String residentName) {
-        this.residentName = residentName;
     }
 
     public int getLastWater() {
@@ -145,14 +118,6 @@ public class PayStatusEntity implements Serializable{
         this.property = property;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public Date getTollTime() {
         return tollTime;
     }
@@ -183,29 +148,5 @@ public class PayStatusEntity implements Serializable{
 
     public void setPayStatus(String payStatus) {
         this.payStatus = payStatus;
-    }
-
-    public int getWater() {
-        return water;
-    }
-
-    public void setWater(int water) {
-        this.water = water;
-    }
-
-    public int getEle() {
-        return ele;
-    }
-
-    public void setEle(int ele) {
-        this.ele = ele;
-    }
-
-    public int getGas() {
-        return gas;
-    }
-
-    public void setGas(int gas) {
-        this.gas = gas;
     }
 }
