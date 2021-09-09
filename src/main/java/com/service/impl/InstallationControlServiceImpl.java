@@ -3,8 +3,6 @@ package com.service.impl;
 import com.entity.installationControl.InstallationControlEntity;
 import com.entity.installationControl.InstallationUseEntity;
 import com.entity.installationControl.vm.*;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.mapper.installationControl.InstallationControlDao;
 import com.service.InstallationControlService;
 import com.utils.Asserts;
@@ -161,14 +159,12 @@ public class InstallationControlServiceImpl implements InstallationControlServic
     @Override
     public InstallationControlEntity selectInstallation(InstallationControlEntitySearchVM searchVM){
         InstallationControlEntity installationEntity = installationControlDao.getMessageByName(searchVM.getInstallation());
-        if(installationEntity==null) return null;
-        else return installationEntity;
+        return installationEntity;
     }
 
     @Override
     public List<InstallationUseEntity> selectAllUseMessage(InstallationUseEntitySearchVM searchVM){
         List<InstallationUseEntity> installationEntityList = installationControlDao.getAllUseMessage(searchVM.getInstallation());
-        if(installationEntityList==null) return null;
-        else return installationEntityList;
+        return installationEntityList;
     }
 }
