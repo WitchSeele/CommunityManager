@@ -15,7 +15,7 @@ public interface PayStatusDao {
             "VALUES(#{residentId},#{residentName},#{lastWater},#{thisWater},#{water},#{lastEle},#{thisEle},#{ele}" +
             ",#{lastGas},#{thisGas},#{gas},#{net},#{parking},#{property},#{amount},#{tollTime},#{tollMan},#{payMethod},#{payStatus})"})
 
-    int createPayStatus(PayStatusEntity payStatusEntity);
+    void createPayStatus(PayStatusEntity payStatusEntity);
 
     @Delete({"DELETE FROM pay_status WHERE payStatusId=#{payStatusId,jdbcType=INTEGER}"})
 
