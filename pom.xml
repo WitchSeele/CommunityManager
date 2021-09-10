@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com</groupId>
-    <artifactId>CommunityManager</artifactId>
+    <artifactId>CommunityManager</artifactId>income and expenditure account
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>CommunityManager</name>
@@ -197,7 +197,7 @@
                     <overwrite>true</overwrite>
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                 </configuration>
-                    <!-- 数据库连接选择8.0以上的，因为用的mysql8.0-->
+                <!-- 数据库连接选择8.0以上的，因为用的mysql8.0-->
 
             </plugin>
         </plugins>
