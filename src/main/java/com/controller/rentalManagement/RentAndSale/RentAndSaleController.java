@@ -71,4 +71,18 @@ public class RentAndSaleController {
     public ApiResult<List<RentAndSaleEntity>> selectAllRS() throws Exception {
         return ApiResult.SUCCESS(rentAndSaleService.RSList());
     }
+
+    @GetMapping("/getRSByID")
+    @ApiOperation("通过ID获取租售信息")
+//    @RequiresPermissions(value = {"", "administrator"}, logical = Logical.OR)
+    public ApiResult selectById(int id) throws Exception {
+        return ApiResult.SUCCESS(rentAndSaleService.selectByID(id));
+    }
+
+    @GetMapping("/getRSByName")
+    @ApiOperation("通过名字获取租售信息")
+//    @RequiresPermissions(value = {"", "administrator"}, logical = Logical.OR)
+    public ApiResult <List<RentAndSaleEntity>> selectByName(String rs_name) throws Exception {
+        return ApiResult.SUCCESS(rentAndSaleService.selectByName(rs_name));
+    }
 }

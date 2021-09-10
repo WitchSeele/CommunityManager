@@ -23,7 +23,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping("/InsertRS")
+    @PostMapping("/InsertC")
     @ApiOperation("添加客户信息")
 //    @RequiresPermissions(value = {"RentAndSaleEntity_insert", "administrator"}, logical = Logical.OR)
     public ApiResult insertC(CustomerEntity customerEntity) {
@@ -36,7 +36,7 @@ public class CustomerController {
         return ApiResult.SUCCESS();
     }
 
-    @DeleteMapping("/deleteRS")
+    @DeleteMapping("/deleteC")
     @ApiOperation("删除客户信息")
 //    @RequiresPermissions(value = {"rentAndSaleEntity_delete", "administrator"}, logical = Logical.OR)
     public ApiResult deleteCById(int c_id) {
@@ -49,7 +49,7 @@ public class CustomerController {
         return ApiResult.SUCCESS();
     }
 
-    @PostMapping("/updateRS")
+    @PostMapping("/updateC")
     @ApiOperation("修改客户信息")
 //    @RequiresPermissions(value = {"payStatus_updatePayStatus", "administrator"}, logical = Logical.OR)
     public ApiResult updateC(CustomerEntity customerEntity) {
@@ -62,10 +62,24 @@ public class CustomerController {
         return ApiResult.SUCCESS();
     }
 
-    @GetMapping("/getRS")
+    @GetMapping("/getC")
     @ApiOperation("获取客户信息")
 //    @RequiresPermissions(value = {"", "administrator"}, logical = Logical.OR)
     public ApiResult<List<CustomerEntity>> selectAllC() throws Exception {
         return ApiResult.SUCCESS(customerService.CList());
+    }
+
+    @GetMapping("/getCByID")
+    @ApiOperation("通过ID获取租售信息")
+//    @RequiresPermissions(value = {"", "administrator"}, logical = Logical.OR)
+    public ApiResult selectById(int c_id) throws Exception {
+        return ApiResult.SUCCESS(customerService.selectByID(c_id));
+    }
+
+    @GetMapping("/getCByName")
+    @ApiOperation("通过名字获取租售信息")
+//    @RequiresPermissions(value = {"", "administrator"}, logical = Logical.OR)
+    public ApiResult <List<CustomerEntity>> selectByName(String c_name) throws Exception {
+        return ApiResult.SUCCESS(customerService.selectByName(c_name));
     }
 }

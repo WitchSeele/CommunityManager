@@ -20,4 +20,10 @@ public interface RSDao {
     int updateRS(RentAndSaleEntity rentAndSaleEntity);
     @Select("SELECT * FROM rent_sale")
     List<RentAndSaleEntity> RSList();
+
+    @Select("select * from rent_sale where id = #{id}")
+    RentAndSaleEntity selectByID(@Param("id")int id);
+
+    @Select("select * from rent_sale where rs_name= #{rs_name}")
+    List<RentAndSaleEntity> selectByName(String rs_name);
 }

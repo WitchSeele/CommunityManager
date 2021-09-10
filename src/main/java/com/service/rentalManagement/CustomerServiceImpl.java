@@ -32,4 +32,14 @@ public class CustomerServiceImpl implements CustomerService{
     public List<CustomerEntity> CList() {
         return customerDao.CList();
     }
+
+    @Override
+    public CustomerEntity selectByID(int c_id) {
+        return customerDao.selectByID(c_id);
+    }
+
+    @Override
+    public List<CustomerEntity> selectByName(String c_name) {
+        return customerDao.selectByName(c_name);
+    }
 }

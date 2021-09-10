@@ -3,9 +3,10 @@ package com.entity.rentalManagement.Customer;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CustomerEntity {
+public class CustomerEntity implements Serializable {
     @ApiModelProperty("客户ID")
     int c_id;
     @ApiModelProperty("客户姓名")

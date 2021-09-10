@@ -42,4 +42,14 @@ public class RentAndSaleServiceImpl implements RentAndSaleService {
     public List<RentAndSaleEntity> RSList() {
         return rsDao.RSList();
     }
+
+    @Override
+    public RentAndSaleEntity selectByID(int id) {
+        return rsDao.selectByID(id);
+    }
+
+    @Override
+    public List<RentAndSaleEntity> selectByName(String rs_name) {
+        return rsDao.selectByName(rs_name);
+    }
 }
