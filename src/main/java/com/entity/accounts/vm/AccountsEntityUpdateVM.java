@@ -1,12 +1,13 @@
-package com.entity.accounts;
+package com.entity.accounts.vm;
 
 import io.swagger.annotations.ApiModelProperty;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class AccountsEntity implements Serializable {
-    @ApiModelProperty("账款id")
+public class AccountsEntityUpdateVM {
+    @NotNull
+    @ApiModelProperty("账款id(notNull)")
     int accountingId;
     @ApiModelProperty("账款名称")
     String accountsName;
@@ -103,7 +104,5 @@ public class AccountsEntity implements Serializable {
     public void setAccountingDate(Date accountingDate) {
         this.accountingDate = accountingDate;
     }
-
-
 
 }

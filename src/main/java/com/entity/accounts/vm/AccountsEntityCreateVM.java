@@ -2,10 +2,12 @@ package com.entity.accounts.vm;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class AccountsEntityCreateVM {
-    @ApiModelProperty("账款id")
+    @NotNull
+    @ApiModelProperty("账款id(notNull)")
     int accountingId;
     @ApiModelProperty("账款名称")
     String accountsName;
@@ -13,6 +15,10 @@ public class AccountsEntityCreateVM {
     String accountsSort;
     @ApiModelProperty("帐款号码")
     int accountsNumber;
+    @ApiModelProperty("借方")
+    int debit;
+    @ApiModelProperty("贷方")
+    int credit;
     @ApiModelProperty("借方数目")
     int debitAmount;
     @ApiModelProperty("贷方数目")
@@ -53,6 +59,20 @@ public class AccountsEntityCreateVM {
 
     public void setAccountsNumber(int accountsNumber) {
         this.accountsNumber = accountsNumber;
+    }
+
+    public int getDebit() {
+        return debit;
+    }
+
+    public void setDebit(int debit) {
+        this.debit = debit;
+    }
+
+    public int getCredit() {return credit; }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
     }
 
     public int getDebitAmount() {
